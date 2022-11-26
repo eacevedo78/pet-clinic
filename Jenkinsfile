@@ -4,6 +4,18 @@ pipeline {
     
     stages {
 
+        stage('Code Quality') {
+           steps {
+               script {
+                  def scannerHome = tool 'sonarqube';
+                  withSonarQubeEnv("sonarqube") {
+                    sh "${tool("sonarqube")}/bin/sonar-scanner"
+                  }
+               }
+           }
+        }
+
+
         stage('Build') {
             steps {
                 echo 'Build'
