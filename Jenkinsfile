@@ -4,6 +4,13 @@ pipeline {
     
     stages {
 
+        stage('Build') {
+            steps {
+                echo 'Build'
+                sh "mvn --batch-mode package" 
+            }
+        }
+
         stage('Code Quality') {
            steps {
                script {
@@ -13,14 +20,6 @@ pipeline {
                   }
                }
            }
-        }
-
-
-        stage('Build') {
-            steps {
-                echo 'Build'
-                sh "mvn --batch-mode package" 
-            }
         }
 
         stage('Archive Unit Tests Results') {
